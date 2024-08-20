@@ -14,7 +14,7 @@ commands:
 jobs:
   build-site:
     machine:
-      image: ubuntu-2004:202101-01
+      image: ubuntu-2204:latest
     resource_class: arm.medium
     steps:
     - setup
