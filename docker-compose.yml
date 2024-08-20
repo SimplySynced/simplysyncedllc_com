@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  cloudflare-webhosting:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=eyJhIjoiZGNhNDU5YWMwNzJkODI2NGQ1NTViZjM1MTk1OTJjNTMiLCJ0IjoiYzUzMzE1NGQtMTMzZS00NzUxLTgxYTYtNjM3NTg3ZTk0YmQ2IiwicyI6IlptWTRZV1UyTTJJdFpHWTFaQzAwTURnM0xUaGxORFl0TXpKallUazVaVGcxWkdObSJ9
+
+  ss_website:
+    container_name: ss_website
+    image: ss_website
+    restart: always
+    ports:
+      - 3000:3000
+    build:
+      context: /dockers/ss_website
+      dockerfile: Dockerfile
+
+networks:
+  webhosting:
+    external: true
+    name: webhosting
