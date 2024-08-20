@@ -25,8 +25,8 @@ jobs:
     - run:
         name: Build multiarch docker image and push to GHCR
         command: |
-          docker build -t simplysyncedllc_com/simplysyncedllc_website .
-          docker push simplysyncedllc_com/simplysyncedllc_website
+          docker build -t ghcr.io/simplysynced/simplysyncedllc_website .
+          docker push ghcr.io/simplysynced/simplysyncedllc_website
 
 workflows:
   Build_and_Deploy:
