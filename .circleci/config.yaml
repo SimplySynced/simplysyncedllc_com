@@ -2,6 +2,15 @@ version: 2.1
 orbs:
   node: circleci/node@5.1.1
 
+commands:
+  setup:
+    steps:
+    - checkout
+    - run:
+        name: Update arm machine
+        command: |
+          sudo apt-get update
+
 jobs:
   build-site:
     machine:
@@ -20,7 +29,7 @@ jobs:
           docker push simplysyncedllc_com/simplysyncedllc_website
 
 workflows:
-  test_my_app:
+  Build_and_Deploy:
     jobs:
     - build-site:
         context:
