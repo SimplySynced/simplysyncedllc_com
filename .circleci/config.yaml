@@ -24,4 +24,4 @@ workflows:
     jobs:
     - build-site
       context:
-        - Github
+      - GITHUB
