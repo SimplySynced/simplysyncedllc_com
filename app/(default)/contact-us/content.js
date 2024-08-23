@@ -105,7 +105,7 @@ export default function ContactUsContent() {
                     id="submit-button" 
                     className="btn-sm w-full text-md text-white bg-blue-600 hover:bg-blue-700 group" 
                     type="submit">                                        
-                    Submit <span className="tracking-normal text-blue-300 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
+                    Submit! <span className="tracking-normal text-blue-300 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
                   </button>
                 </div>
               </form>
