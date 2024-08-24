@@ -28,6 +28,6 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts", "app/(default)/robots.js",],
+    ".next/types/**/*.ts", "app/(default)/robots.js"],
   "exclude": ["node_modules"]
 }
