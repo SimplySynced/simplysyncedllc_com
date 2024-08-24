@@ -2,7 +2,8 @@
 import React, { useRef, useState } from "react"
 import ReCAPTCHA from "react-google-recaptcha";
 import { toast } from "react-hot-toast";
-const { NEXT_PUBLIC_RECAPTCHA_SITE_KEY } = process.env;
+const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+console.log(sitekey)
 
 export default function ContactUsContent() {  
   const recaptchaRef = useRef(null);
@@ -98,7 +99,7 @@ export default function ContactUsContent() {
                   </div>
                 </div>
                 <div className="mt-6">
-                  <ReCAPTCHA ref={recaptchaRef} size="invisible" sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} onChange={onReCAPTCHAChange} />
+                  <ReCAPTCHA ref={recaptchaRef} size="invisible" sitekey={sitekey} onChange={onReCAPTCHAChange} />
                 </div>
                 <div className="mt-6">
                   <button 
