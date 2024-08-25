@@ -2,6 +2,7 @@
 import React, { useRef, useState } from "react"
 import ReCAPTCHA from "react-google-recaptcha";
 import { toast } from "react-hot-toast";
+import SITE_KEY from "@/lib/values"
 
 export default function ContactUsContent() {  
   const recaptchaRef = useRef(null);
@@ -11,8 +12,6 @@ export default function ContactUsContent() {
   const [best_time, setBest_time] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
-
-  const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
