@@ -2,9 +2,15 @@
 import React, { useRef, useState } from "react"
 import ReCAPTCHA from "react-google-recaptcha";
 import { toast } from "react-hot-toast";
-import SITE_KEY from "@/lib/values"
+import sk from "@/lib/values"
 
 export default function ContactUsContent() {  
+  console.log(sk);
+
+  const SITEKEY = sk();
+
+  console.log(SITEKEY);
+
   const recaptchaRef = useRef(null);
   const [person, setPerson] = useState("");
   const [email, setEmail] = useState("");
@@ -98,7 +104,7 @@ export default function ContactUsContent() {
                   </div>
                 </div>
                 <div className="mt-6">
-                  <ReCAPTCHA ref={recaptchaRef} size="invisible" sitekey={SITE_KEY} onChange={onReCAPTCHAChange} />
+                  <ReCAPTCHA ref={recaptchaRef} size="invisible" sitekey={SITEKEY} onChange={onReCAPTCHAChange} />
                 </div>
                 <div className="mt-6">
                   <button 
