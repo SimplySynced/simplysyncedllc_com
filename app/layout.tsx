@@ -1,4 +1,5 @@
 import './css/style.css'
+import { PublicEnvScript } from 'next-runtime-env';
 
 import { Inter, Playfair_Display } from 'next/font/google'
 
@@ -28,6 +29,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <PublicEnvScript />
+      </head>
       <body className={`${inter.variable} ${playfair.variable} font-inter antialiased bg-white text-slate-800 tracking-tight`}>
         {children}
       </body>
