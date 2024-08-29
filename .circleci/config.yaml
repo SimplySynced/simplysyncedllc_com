@@ -13,16 +13,16 @@ commands:
 
 jobs:
   get-version:
-    - name: Get version from package.json
-      id: release
-      run: |
-        CURR_VER="$(cat package.json | jq -r .name)_v$(cat package.json | jq -r .version)"
-        CURR_NAME="$(cat package.json | jq -r .name) v$(cat package.json | jq -r .version)"
-        echo $CURR_VER
+  - name: Get version from package.json
+    id: release
+    run: |
+      CURR_VER="$(cat package.json | jq -r .name)_v$(cat package.json | jq -r .version)"
+      CURR_NAME="$(cat package.json | jq -r .name) v$(cat package.json | jq -r .version)"
+      echo $CURR_VER
 
   create-release:
-    - gh/release:
-      tag: $CURR_VER
+  - gh/release:
+    tag: $CURR_VER
 
   build-and-deploy:
     machine:
@@ -44,7 +44,7 @@ workflows:
   Build_and_Deploy:
     jobs:
     - get-version
-    - create-release
+    - create-release:
         context:
         - Github
     - build-and-deploy:
