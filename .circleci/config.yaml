@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  node: circleci/node@5.1.1
+  github-cli: circleci/github-cli@2.4.0
 
 commands:
   setup:
@@ -12,7 +12,19 @@ commands:
           sudo apt-get update
 
 jobs:
-  build-site:
+  get-version:
+    - name: Get version from package.json
+      id: release
+      run: |
+        CURR_VER="$(cat package.json | jq -r .name)_v$(cat package.json | jq -r .version)"
+        CURR_NAME="$(cat package.json | jq -r .name) v$(cat package.json | jq -r .version)"
+        echo $CURR_VER
+
+  create-release:
+    - gh/release:
+      tag: $CURR_VER
+
+  build-and-deploy:
     machine:
       image: ubuntu-2204:current
     resource_class: arm.medium
@@ -31,6 +43,10 @@ jobs:
 workflows:
   Build_and_Deploy:
     jobs:
-    - build-site:
+    - get-version
+    - create-release
+        context:
+        - Github
+    - build-and-deploy:
         context:
         - Github
