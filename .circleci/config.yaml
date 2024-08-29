@@ -14,7 +14,7 @@ commands:
 jobs:
   get-version:
     steps:
-    - checkout
+    - setup
     - run:
         name: Get version from package.json
         command: |
