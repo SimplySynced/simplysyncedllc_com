@@ -22,7 +22,7 @@ jobs:
 
   create-release:
   - gh/release:
-    tag: $CURR_VER
+    tag: 1.0.5
 
   build-and-deploy:
     machine:
