@@ -23,7 +23,9 @@ jobs:
         command: |
           CURR_VER="$(cat package.json | jq -r .name)_v$(cat package.json | jq -r .version)"
           CURR_NAME="$(cat package.json | jq -r .name) v$(cat package.json | jq -r .version)"
-          echo $CURR_VER
+          return $CURR_VER
+        result-encoding: string
+
 
   build-and-deploy:
     machine:
@@ -39,7 +41,7 @@ jobs:
         name: Build multiarch docker image and push to GHCR
         command: |
           docker build -t ghcr.io/simplysynced/simplysyncedllc_website .
-          docker push ghcr.io/simplysynced/simplysyncedllc_website
+          docker push ghcr.io/simplysynced/simplysyncedllc_website:${{steps.get-version.outputs.result}}
 
 workflows:
   Build_and_Deploy:
