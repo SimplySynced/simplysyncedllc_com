@@ -13,6 +13,9 @@ commands:
 
 jobs:
   get-version:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: arm.medium
     steps:
     - setup
     - run:
