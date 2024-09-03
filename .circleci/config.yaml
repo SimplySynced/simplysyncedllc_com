@@ -31,13 +31,13 @@ jobs:
         name: Build multiarch docker image and push to GHCR
         command: |
           CURR_VER="$(cat package.json | jq -r .version)"
-          docker build -t ghcr.io/simplysynced/simplysyncedllc_weite:$CURR_VER .
+          docker build -t ghcr.io/simplysynced/simplysyncedllc_website:$CURR_VER .
           docker push ghcr.io/simplysynced/simplysyncedllc_website:$CURR_VER
     - discord/status:
         fail_only: false
-        failure_message: "The build for repo **${CIRCLE_PROJECT_REPONAME}** during **${CIRCLE_JOB}** has failed."
+        failure_message: "The build for repo **${CIRCLE_PROJECT_REPONAME}** during the **${CIRCLE_JOB}** job has failed."
         webhook: "${DISCORD_STATUS_WEBHOOK}"
-        success_message: "The build for repo **${CIRCLE_PROJECT_REPONAME}** during **${CIRCLE_JOB}** has completed successfully."
+        success_message: "The build for repo **${CIRCLE_PROJECT_REPONAME}** during the **${CIRCLE_JOB}** job has completed successfully."
 
 workflows:
   Build_and_Deploy:
