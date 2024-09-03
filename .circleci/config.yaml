@@ -52,5 +52,7 @@ workflows:
         context:
         - Github
     - alert-discord:
+        requires:
+        - build-and-deploy
         context:
         - discord
