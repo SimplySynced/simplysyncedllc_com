@@ -41,8 +41,9 @@ jobs:
     steps:
     - discord/status:
         fail_only: false
-        failure_message: "**${CIRCLE_USERNAME}**'s build: **${CIRCLE_JOB}** failed."
+        failure_message: "**${CIRCLE_USERNAME}**'s build: **${CIRCLE_JOB}** has failed."
         webhook: "${DISCORD_STATUS_WEBHOOK}"
+        success_message: "**${CIRCLE_USERNAME}**'s build: **${CIRCLE_JOB}** completed successful."
 
 workflows:
   Build_and_Deploy:
