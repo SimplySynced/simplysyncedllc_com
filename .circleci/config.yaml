@@ -35,9 +35,9 @@ jobs:
           docker push ghcr.io/simplysynced/simplysyncedllc_website:$CURR_VER
     - discord/status:
         fail_only: false
-        failure_message: "**${CIRCLE_USERNAME}**'s build: **${CIRCLE_JOB}** has failed."
+        failure_message: "**${CIRCLE_PR_USERNAME}**'s build: **${CIRCLE_JOB}** has failed for **${CIRCLE_PR_REPONAME}**."
         webhook: "${DISCORD_STATUS_WEBHOOK}"
-        success_message: "**${CIRCLE_USERNAME}**'s build: **${CIRCLE_JOB}** completed successful."
+        success_message: "**${CIRCLE_PR_USERNAME}**'s build: **${CIRCLE_JOB}** completed successful for **${CIRCLE_PR_REPONAME}**."
 
 workflows:
   Build_and_Deploy:
