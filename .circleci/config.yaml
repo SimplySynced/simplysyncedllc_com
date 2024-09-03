@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  github-cli: circleci/github-cli@2.4.0
+  discord: antonioned/discord@0.1.0
 
 commands:
   setup:
@@ -35,6 +35,14 @@ jobs:
           docker build -t ghcr.io/simplysynced/simplysyncedllc_website:$CURR_VER .
           docker push ghcr.io/simplysynced/simplysyncedllc_website:$CURR_VER
 
+  alert-discord:
+    machine:
+      image: ubuntu-2204:current
+    steps:
+    - discord/status:
+        fail_only: false
+        failure_message: "**${CIRCLE_USERNAME}**'s build: **${CIRCLE_JOB}** failed."
+        webhook: "${DISCORD_STATUS_WEBHOOK}"
 
 workflows:
   Build_and_Deploy:
@@ -42,3 +50,6 @@ workflows:
     - build-and-deploy:
         context:
         - Github
+    - alert-discord:
+        context:
+        - discord
