@@ -32,7 +32,7 @@ jobs:
         name: Build multiarch docker image and push to GHCR
         command: |
           CURR_VER="$(cat package.json | jq -r .version)"
-          docker build -t ghcr.io/simplysynced/simplysyncedllc_website:$CURR_VER .
+          docker build -t ghcr.io/simplysynced/simplysyncedllc_weite:$CURR_VER .
           docker push ghcr.io/simplysynced/simplysyncedllc_website:$CURR_VER
 
   alert-discord:
