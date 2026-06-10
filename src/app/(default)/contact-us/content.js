@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 
 export default function ContactUsContent() {  
 
-  const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? '';
 
   const recaptchaRef = useRef(null);
   const [person, setPerson] = useState("");

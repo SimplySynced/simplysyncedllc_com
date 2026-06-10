@@ -8,10 +8,15 @@ export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
 export default function Image() {
-  const logoData = readFileSync(
-    join(process.cwd(), 'public/images/simply_synced_logo_whitetext.png'),
-  )
-  const logoSrc = `data:image/png;base64,${logoData.toString('base64')}`
+  let logoSrc: string | null = null
+  try {
+    const logoData = readFileSync(
+      join(process.cwd(), 'public/images/simply_synced_logo_whitetext.png'),
+    )
+    logoSrc = `data:image/png;base64,${logoData.toString('base64')}`
+  } catch {
+    // Logo unavailable — render text-only fallback
+  }
 
   return new ImageResponse(
     (
@@ -53,14 +58,27 @@ export default function Image() {
           }}
         />
 
-        {/* Logo */}
-        {/* Logo is 1850×625 — display at ~2.9x scale-down keeping ratio */}
-        <img
-          src={logoSrc}
-          width={430}
-          height={145}
-          style={{ objectFit: 'contain', marginBottom: '40px' }}
-        />
+        {/* Logo or text fallback */}
+        {logoSrc ? (
+          <img
+            src={logoSrc}
+            width={430}
+            height={145}
+            style={{ objectFit: 'contain', marginBottom: '40px' }}
+          />
+        ) : (
+          <div
+            style={{
+              fontSize: '52px',
+              fontWeight: 700,
+              color: '#ffffff',
+              marginBottom: '40px',
+              letterSpacing: '-0.02em',
+            }}
+          >
+            Simply Synced LLC
+          </div>
+        )}
 
         {/* Gold divider */}
         <div
