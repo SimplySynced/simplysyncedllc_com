@@ -1,11 +1,11 @@
 import { Resend } from 'resend'
 import { NextRequest, NextResponse } from 'next/server'
 
-const { RESEND_API_KEY, RECAPTCHA_SECRET_KEY } = process.env
-
-const resend = new Resend(RESEND_API_KEY)
+export const dynamic = 'force-dynamic'
 
 export async function POST(req: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY)
+  const { RECAPTCHA_SECRET_KEY } = process.env
   const body = await req.json()
   const { person, email, phone, best_time, subject, message, captcha } = body
 
