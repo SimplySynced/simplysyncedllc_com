@@ -1,0 +1,131 @@
+/* Typography */
+.h1 {
+    @apply text-5xl font-bold tracking-tight;
+}
+
+.h2 {
+    @apply text-4xl font-bold tracking-tight;
+}
+
+.h3 {
+    @apply text-3xl font-bold tracking-tight;
+}
+
+.h4 {
+    @apply text-2xl font-bold;
+}
+
+@screen md {
+    .h1 {
+        @apply text-6xl;
+    }
+
+    .h2 {
+        @apply text-5xl;
+    }
+}
+
+/* Buttons */
+.btn,
+.btn-sm {
+    @apply font-semibold inline-flex items-center justify-center border border-transparent leading-snug transition-all duration-200 ease-in-out;
+}
+
+.btn {
+    @apply px-7 py-3.5 rounded-xl text-base;
+}
+
+.btn-sm {
+    @apply px-5 py-2.5 rounded-lg text-sm;
+}
+
+/* Primary Button */
+.btn-primary {
+    @apply bg-navy-600 text-white hover:bg-navy-700 shadow-md hover:shadow-lg;
+}
+
+/* Gold Button */
+.btn-gold {
+    @apply bg-gold-400 text-navy-900 hover:bg-gold-500 shadow-md hover:shadow-gold;
+}
+
+/* Outline Button */
+.btn-outline {
+    @apply border-2 border-navy-600 text-navy-600 hover:bg-navy-600 hover:text-white;
+}
+
+/* Ghost Button */
+.btn-ghost {
+    @apply text-navy-600 hover:bg-navy-50;
+}
+
+/* Forms */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+}
+
+.form-input,
+.form-textarea,
+.form-multiselect,
+.form-select,
+.form-checkbox,
+.form-radio {
+    @apply bg-white border-2 border-navy-100 focus:border-gold-400 focus:ring-2 focus:ring-gold-400/20 transition-colors duration-200;
+}
+
+.form-input,
+.form-textarea,
+.form-multiselect,
+.form-select,
+.form-checkbox {
+    @apply rounded-xl;
+}
+
+.form-input,
+.form-textarea,
+.form-multiselect,
+.form-select {
+    @apply py-3 px-4;
+}
+
+.form-input,
+.form-textarea {
+    @apply placeholder-slate-400 leading-snug;
+}
+
+.form-select {
+    @apply pr-10;
+}
+
+.form-checkbox,
+.form-radio {
+    @apply text-gold-500 rounded-md;
+}
+
+/* Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Section divider */
+.section-divider {
+    @apply w-16 h-1 bg-gold-400 rounded-full mx-auto;
+}
+
+/* Glass effect */
+.glass {
+    @apply bg-white/80 backdrop-blur-lg;
+}
+
+/* Card styles */
+.card {
+    @apply bg-white rounded-2xl shadow-card transition-all duration-300 hover:shadow-card-hover;
+}
