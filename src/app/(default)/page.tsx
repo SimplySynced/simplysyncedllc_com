@@ -7,8 +7,10 @@ export const metadata: Metadata = {
     title: 'Simply Synced LLC | IT Consulting & Managed Services in Lower Bucks, PA',
     description: 'Simply Synced is your IT consulting and managed service provider in the Lower Bucks area of Pennsylvania. Technology solutions delivered with integrity, faith, and excellence.',
     url: 'https://simplysyncedllc.com',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630 }],
   },
   twitter: {
+    card: 'summary_large_image',
     title: 'Simply Synced LLC | IT Consulting & Managed Services',
     description: 'Simply Synced is your IT consulting and managed service provider in the Lower Bucks area of Pennsylvania. Technology solutions delivered with integrity, faith, and excellence.',
   },

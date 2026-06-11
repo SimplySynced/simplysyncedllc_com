@@ -7,8 +7,10 @@ export const metadata: Metadata = {
     title: 'Remote IT Management Services — Simply Synced LLC',
     description: "Simply Synced's remote management keeps your IT infrastructure monitored, secure, and optimized. Real-time threat detection, remote software deployment, and performance tuning in Lower Bucks, PA.",
     url: 'https://simplysyncedllc.com/remote-management',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630 }],
   },
   twitter: {
+    card: 'summary_large_image',
     title: 'Remote IT Management Services — Simply Synced LLC',
     description: 'Remote IT monitoring, security, and management by Simply Synced LLC in Lower Bucks, PA. Keep your systems running from anywhere.',
   },

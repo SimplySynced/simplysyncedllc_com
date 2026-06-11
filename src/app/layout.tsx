@@ -41,6 +41,14 @@ export const metadata: Metadata = {
     siteName,
     title: `${siteName} | IT Consulting & Managed Services`,
     description: defaultDescription,
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'Simply Synced LLC | IT Consulting & Managed Services in Lower Bucks, PA',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

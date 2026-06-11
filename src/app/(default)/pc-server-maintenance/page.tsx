@@ -7,8 +7,10 @@ export const metadata: Metadata = {
     title: 'Business PC & Server Maintenance — Simply Synced LLC',
     description: 'Proactive PC and server maintenance for businesses by Simply Synced LLC in Lower Bucks, PA. Hardware upkeep, software updates, virus protection, and data backup.',
     url: 'https://simplysyncedllc.com/pc-server-maintenance',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630 }],
   },
   twitter: {
+    card: 'summary_large_image',
     title: 'Business PC & Server Maintenance — Simply Synced LLC',
     description: 'Proactive PC and server maintenance in Lower Bucks, PA. Hardware upkeep, updates, virus protection, and backup from Simply Synced LLC.',
   },

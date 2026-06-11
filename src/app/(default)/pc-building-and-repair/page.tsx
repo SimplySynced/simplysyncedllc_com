@@ -7,8 +7,10 @@ export const metadata: Metadata = {
     title: 'Custom PC Building & Repair — Simply Synced LLC',
     description: 'Custom PC building, hardware upgrades, virus removal, and routine maintenance by Simply Synced LLC in Lower Bucks, PA. Expert care for your computer.',
     url: 'https://simplysyncedllc.com/pc-building-and-repair',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630 }],
   },
   twitter: {
+    card: 'summary_large_image',
     title: 'Custom PC Building & Repair — Simply Synced LLC',
     description: 'Custom PC building, repairs, virus removal, and maintenance in Lower Bucks, PA. Expert service from Simply Synced LLC.',
   },

@@ -26,95 +26,111 @@ export default function Image() {
           height: '630px',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: 'linear-gradient(135deg, #151d2b 0%, #1E293B 60%, #2b3544 100%)',
-          padding: '60px 80px',
+          background: 'linear-gradient(160deg, #0d1520 0%, #1a2744 50%, #0d1520 100%)',
           position: 'relative',
+          overflow: 'hidden',
         }}
       >
-        {/* Top-left accent dot */}
+        {/* Ambient gold glow — top left */}
         <div
           style={{
             position: 'absolute',
-            top: '44px',
-            left: '64px',
-            width: '7px',
-            height: '7px',
+            top: '-100px',
+            left: '-100px',
+            width: '520px',
+            height: '520px',
+            background: 'radial-gradient(circle, rgba(212,168,67,0.20) 0%, transparent 65%)',
             borderRadius: '50%',
-            background: '#D4A843',
+            display: 'flex',
           }}
         />
-        {/* Bottom-right accent dot */}
+        {/* Ambient blue glow — bottom right */}
         <div
           style={{
             position: 'absolute',
-            bottom: '44px',
-            right: '64px',
-            width: '7px',
-            height: '7px',
+            bottom: '-80px',
+            right: '-80px',
+            width: '420px',
+            height: '420px',
+            background: 'radial-gradient(circle, rgba(80,130,220,0.12) 0%, transparent 65%)',
             borderRadius: '50%',
-            background: '#D4A843',
+            display: 'flex',
           }}
         />
 
-        {/* Logo or text fallback */}
-        {logoSrc ? (
-          <img
-            src={logoSrc}
-            width={430}
-            height={145}
-            style={{ objectFit: 'contain', marginBottom: '40px' }}
-          />
-        ) : (
+        {/* Upper area — logo centered */}
+        <div
+          style={{
+            flex: 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px 40px 10px',
+          }}
+        >
+          {logoSrc ? (
+            <img
+              src={logoSrc}
+              width={980}
+              height={330}
+              style={{ objectFit: 'contain' }}
+            />
+          ) : (
+            <div
+              style={{
+                fontSize: '80px',
+                fontWeight: 800,
+                color: '#ffffff',
+                letterSpacing: '-0.02em',
+                display: 'flex',
+              }}
+            >
+              Simply Synced LLC
+            </div>
+          )}
+        </div>
+
+        {/* Gold accent line */}
+        <div
+          style={{
+            height: '4px',
+            background: 'linear-gradient(90deg, transparent 0%, #C49A3C 15%, #D4A843 50%, #C49A3C 85%, transparent 100%)',
+            display: 'flex',
+          }}
+        />
+
+        {/* Bottom strip */}
+        <div
+          style={{
+            background: 'rgba(0,0,0,0.60)',
+            padding: '26px 60px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
+          }}
+        >
           <div
             style={{
-              fontSize: '52px',
-              fontWeight: 700,
+              fontSize: '64px',
+              fontWeight: 800,
               color: '#ffffff',
-              marginBottom: '40px',
               letterSpacing: '-0.02em',
+              display: 'flex',
             }}
           >
             Simply Synced LLC
           </div>
-        )}
-
-        {/* Gold divider */}
-        <div
-          style={{
-            width: '90px',
-            height: '3px',
-            background: 'linear-gradient(90deg, #C49A3C 0%, #D4A843 50%, #edc978 100%)',
-            borderRadius: '999px',
-            marginBottom: '30px',
-          }}
-        />
-
-        {/* Service tagline */}
-        <div
-          style={{
-            fontSize: '27px',
-            color: '#b9c3d3',
-            textAlign: 'center',
-            letterSpacing: '0.07em',
-            textTransform: 'uppercase',
-            marginBottom: '14px',
-          }}
-        >
-          IT Consulting &amp; Managed Services
-        </div>
-
-        {/* Location */}
-        <div
-          style={{
-            fontSize: '19px',
-            color: '#647590',
-            textAlign: 'center',
-            letterSpacing: '0.02em',
-          }}
-        >
-          Serving Lower Bucks County, Pennsylvania
+          <div
+            style={{
+              fontSize: '28px',
+              color: '#D4A843',
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+              display: 'flex',
+            }}
+          >
+            IT Consulting  •  Managed Services  •  Lower Bucks, PA
+          </div>
         </div>
       </div>
     ),
