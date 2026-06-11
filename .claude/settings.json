@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /usr/local/bin /usr/bin /home/dex/.nvm /home/dex/.yarn -name \"node\" -o -name \"yarn\" -o -name \"tsc\" 2>/dev/null | head -20)",
+      "Read(//usr/local/**)",
+      "Bash(/home/dex/.nvm/versions/node/v22.9.0/bin/node /home/dex/.nvm/versions/node/v22.9.0/bin/yarn tsc --noEmit)",
+      "Bash(/home/dex/.nvm/versions/node/v22.9.0/bin/node /home/dex/.nvm/versions/node/v22.9.0/bin/yarn next build)",
+      "Bash(ls /dockers/ss_website/src/app/ 2>/dev/null && echo \"EXISTS\" || echo \"NOT FOUND\")",
+      "Read(//dockers/ss_website/src/**)",
+      "Bash(netstat -tlnp)",
+      "Bash(git push *)"
+    ]
+  }
+}
