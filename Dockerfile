@@ -14,11 +14,6 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Provide a placeholder for the public reCAPTCHA site key at build time.
-# The actual key is injected at runtime via the container environment.
-ARG NEXT_PUBLIC_RECAPTCHA_SITE_KEY=""
-ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-
 ENV NODE_OPTIONS="--max-old-space-size=3072"
 
 RUN yarn build

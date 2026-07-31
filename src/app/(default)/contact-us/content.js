@@ -1,11 +1,18 @@
 'use client';
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import ReCAPTCHA from "react-google-recaptcha";
 import { toast } from "react-hot-toast";
 
-export default function ContactUsContent() {  
+export default function ContactUsContent() {
 
-  const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? '';
+  const [siteKey, setSiteKey] = useState('');
+
+  useEffect(() => {
+    fetch('/api/recaptcha-key')
+      .then((res) => res.json())
+      .then((data) => setSiteKey(data.siteKey))
+      .catch(() => toast.error('Failed to load reCAPTCHA, please refresh the page'));
+  }, []);
 
   const recaptchaRef = useRef(null);
   const [person, setPerson] = useState("");
@@ -17,6 +24,10 @@ export default function ContactUsContent() {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    if (!siteKey) {
+      toast.error('reCAPTCHA is still loading, please try again in a moment');
+      return;
+    }
     recaptchaRef.current.execute();
   }
 
@@ -156,7 +167,9 @@ export default function ContactUsContent() {
                     </div>
                   </div>
                   <div className="mt-4">
-                    <ReCAPTCHA ref={recaptchaRef} size="invisible" sitekey={SITE_KEY} onChange={onReCAPTCHAChange} />
+                    {siteKey && (
+                      <ReCAPTCHA ref={recaptchaRef} size="invisible" sitekey={siteKey} onChange={onReCAPTCHAChange} />
+                    )}
                   </div>
                   <div className="mt-6">
                     <button 

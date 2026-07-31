@@ -85,8 +85,8 @@ RESEND_API_KEY=re_...
 # Google reCAPTCHA — secret used server-side to verify tokens
 RECAPTCHA_SECRET_KEY=6L...
 
-# Google reCAPTCHA — site key embedded in the browser bundle (safe to expose)
-NEXT_PUBLIC_RECAPTCHA_SITE_KEY=6L...
+# Google reCAPTCHA — site key, served to the browser via /api/recaptcha-key (safe to expose)
+RECAPTCHA_SITE_KEY=6L...
 
 # Cloudflare Tunnel — injected at runtime, never hardcode in docker-compose.yml
 CLOUDFLARE_TUNNEL_TOKEN=eyJ...
@@ -96,7 +96,7 @@ CLOUDFLARE_TUNNEL_TOKEN=eyJ...
 |---|---|---|
 | `RESEND_API_KEY` | `src/app/api/contact/route.ts` | No |
 | `RECAPTCHA_SECRET_KEY` | `src/app/api/contact/route.ts` | No |
-| `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` | `src/app/(default)/contact-us/content.js` | Yes (by design) |
+| `RECAPTCHA_SITE_KEY` | `src/app/api/recaptcha-key/route.ts` | Yes, via API route (by design) |
 | `CLOUDFLARE_TUNNEL_TOKEN` | `docker-compose.yml` (env ref) | No |
 
 ---
