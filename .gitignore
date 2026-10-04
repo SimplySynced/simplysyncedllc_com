@@ -46,3 +46,14 @@ next-env.d.ts
 
 # No Claude
 .claude
+
+# Local AI-agent / issue-tracker files (never committed)
+.beads/
+.beads-credential-key
+.dolt/
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+AGENTS.md
+.agents/
+.codex/
