@@ -1,49 +1,73 @@
 version: 2.1
 orbs:
   discord: antonioned/discord@0.1.0
-
 commands:
   setup:
     steps:
-    - checkout
-    - run:
-        name: Update arm machine
-        command: |
-          sudo apt-get update
-
+      - checkout
+      - run:
+          # Exported to $BASH_ENV so every later step (including discord/status)
+          # sees them — each `run` step is a fresh shell.
+          name: Set image name and version from package.json
+          command: |
+            echo "export IMAGE=ghcr.io/simplysynced/simplysyncedllc_com" >> "$BASH_ENV"
+            echo "export CURR_VER=$(jq -r .version package.json)" >> "$BASH_ENV"
+            source "$BASH_ENV"
+            echo "$IMAGE:$CURR_VER"
+      - run:
+          name: Login to GHCR
+          command: echo "$GH_TOKEN" | docker login ghcr.io -u "$GH_USER" --password-stdin
 jobs:
-  build-and-deploy:
-    machine:
-      image: ubuntu-2204:current
-    resource_class: arm.medium
+  build:
+    # Builds natively on each architecture (no QEMU emulation) and pushes a
+    # per-arch tag; the manifest job joins them into one multi-arch tag.
+    # amd64 = new x86 hosting, arm64 = Pi cluster.
+    parameters:
+      arch: { type: enum, enum: [amd64, arm64] }
+      resource_class: { type: string }
+    machine: { image: ubuntu-2204:current }
+    resource_class: << parameters.resource_class >>
     steps:
-    - setup
-    - run:
-        name: Get version from package.json
-        command: |
-          CURR_VER="$(cat package.json | jq -r .version)"
-          echo $CURR_VER
-    - run:
-        name: Login to GHCR
-        command: |
-          docker login ghcr.io -u $GH_USER -p $GH_TOKEN
-    - run:
-        name: Build multiarch docker image and push to GHCR
-        command: |
-          CURR_VER="$(cat package.json | jq -r .version)"
-          docker build -t ghcr.io/simplysynced/simplysyncedllc_com:$CURR_VER .
-          docker push ghcr.io/simplysynced/simplysyncedllc_com:$CURR_VER
-    - discord/status:
-        fail_only: false
-        failure_message: "The build for repo **${CIRCLE_PROJECT_REPONAME}** during the **${CIRCLE_JOB}** job has failed."
-        webhook: "${DISCORD_STATUS_WEBHOOK}"
-        success_message: "The build for repo **${CIRCLE_PROJECT_REPONAME}** during the **${CIRCLE_JOB}** job has completed successfully."
-
+      - setup
+      - run:
+          name: Build << parameters.arch >> docker image and push to GHCR
+          command: |
+            docker build -t $IMAGE:$CURR_VER-<< parameters.arch >> .
+            docker push $IMAGE:$CURR_VER-<< parameters.arch >>
+      - discord/status:
+          fail_only: true
+          failure_message: "The build for repo **${CIRCLE_PROJECT_REPONAME}** during the **${CIRCLE_JOB}** job has failed. [<< parameters.arch >>]"
+          webhook: "${DISCORD_STATUS_WEBHOOK}"
+  manifest:
+    machine: { image: ubuntu-2204:current }
+    resource_class: medium
+    steps:
+      - setup
+      - run:
+          name: Publish multi-arch manifest (amd64 + arm64)
+          command: |
+            docker buildx imagetools create -t $IMAGE:$CURR_VER \
+              $IMAGE:$CURR_VER-amd64 $IMAGE:$CURR_VER-arm64
+            docker buildx imagetools inspect $IMAGE:$CURR_VER
+      - discord/status:
+          fail_only: false
+          failure_message: "The build for repo **${CIRCLE_PROJECT_REPONAME}** during the **${CIRCLE_JOB}** job has failed."
+          webhook: "${DISCORD_STATUS_WEBHOOK}"
+          success_message: "The build for repo **${CIRCLE_PROJECT_REPONAME}** during the **${CIRCLE_JOB}** job has completed successfully."
 workflows:
   Build_and_Deploy:
     jobs:
-    - build-and-deploy:
-        name: Build and Deploy
-        context:
-        - Github
-        - discord
+      - build:
+          name: Build amd64
+          arch: amd64
+          resource_class: medium
+          context: [Github, discord]
+      - build:
+          name: Build arm64
+          arch: arm64
+          resource_class: arm.medium
+          context: [Github, discord]
+      - manifest:
+          name: Publish multi-arch image
+          requires: [Build amd64, Build arm64]
+          context: [Github, discord]
